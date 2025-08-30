@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express=require('express');
 const morgan = require('morgan');
 const app=express();
@@ -9,7 +10,7 @@ app.get('/',(req,res)=>{
    return res.status(200).send("<h1>hello</h1>");
 })
 
-const PORT=8080;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT,()=>{
-    console.log(`App is running ${PORT}`);
+    console.log(`App is running on port ${PORT}`);
 })

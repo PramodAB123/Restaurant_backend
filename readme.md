@@ -28,6 +28,35 @@ This is a simple backend server for a restaurant application built using **Node.
    npm install
    ```
 
+### Environment Variables
+
+This project uses environment variables for configuration. Follow these steps to set up your environment:
+
+1. **Create a `.env` file** in the root directory:
+   ```bash
+   # Server Configuration
+   PORT=8080
+   NODE_ENV=development
+   
+   # Database Configuration
+   DB_HOST=localhost
+   DB_PORT=5432
+   DB_NAME=restaurant_db
+   DB_USER=your_username
+   DB_PASSWORD=your_password
+   
+   # JWT Configuration
+   JWT_SECRET=your_jwt_secret_key_here
+   JWT_EXPIRES_IN=24h
+   
+   # Other Configuration
+   CORS_ORIGIN=http://localhost:3000
+   ```
+
+2. **Important**: Never commit your `.env` file to GitHub. It's already added to `.gitignore`.
+
+3. **For deployment**: Set environment variables in your hosting platform (Heroku, Vercel, etc.)
+
 ### Running the Server
 
 Start the server with:
