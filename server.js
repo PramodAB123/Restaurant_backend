@@ -5,6 +5,7 @@ const connectdb = require('./config/db');
 const app=express();
 const authRoutes=require('./routes/authRoutes')
 const userRoutes=require('./routes/userRoutes')
+const restuarentRoutes=require('./routes/restuarentroutes')
 connectdb();
 app.use(morgan('dev'))
 app.use(express.json());
@@ -14,6 +15,7 @@ app.get('/',(req,res)=>{
 })
 app.use('/api/v1/auth',authRoutes)
 app.use('/api/v1/user',userRoutes);
+app.use('/api/v1/restuarent',restuarentRoutes);
 console.log(process.env.PORT)
 const PORT = process.env.PORT 
 app.listen(PORT,()=>{

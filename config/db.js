@@ -1,5 +1,4 @@
 const mongoose=require('mongoose');
-const express=require('express')
 
 const connectdb = async () => {
     try {
