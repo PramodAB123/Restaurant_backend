@@ -7,6 +7,7 @@ const authRoutes=require('./routes/authRoutes')
 const userRoutes=require('./routes/userRoutes')
 const restuarentRoutes=require('./routes/restuarentroutes')
 const categoryRoutes=require('./routes/cateogoryroutes');
+const foodRoutes=require('./routes/foodroutes');
 connectdb();
 app.use(morgan('dev'))
 app.use(express.json());
@@ -18,6 +19,7 @@ app.use('/api/v1/auth',authRoutes)
 app.use('/api/v1/user',userRoutes);
 app.use('/api/v1/restuarent',restuarentRoutes);
 app.use('/api/v1/category',categoryRoutes);
+app.use('/api/v1/food',foodRoutes);
 console.log(process.env.PORT)
 const PORT = process.env.PORT 
 app.listen(PORT,()=>{

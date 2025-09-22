@@ -51,4 +51,4 @@ const updatecategory=async(req,res)=>{
         })
     }
 }
-module.exports = { addcategory,getcategory,getcategorybyid ,deletecategory};
+module.exports = { addcategory,getcategory,getcategorybyid ,deletecategory,updatecategory};
