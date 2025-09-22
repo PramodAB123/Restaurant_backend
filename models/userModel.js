@@ -22,7 +22,7 @@ const userSchema=new mongoose.Schema({
     },
     usertype:{
         type:String,
-        required:[true,'the usertype is required'],
+       required:[true,'the usertype is required'],
         default:'client',
         enum:['client','admin','vendor','driver']
     },

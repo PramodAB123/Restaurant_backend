@@ -230,6 +230,27 @@ const placorderfunction=async(req,res)=>{
         });
     }
 }
+const changeorderstatus=async(req,res)=>{
+    try{
+        const orderId=req.params.id;
+        if(!orderId){
+            res.status(200).send({
+                message:"please provide valid order id"
+            })
+        }
+        const {status}=req.body;
+        const order=await orderModel.findByIdAndUpdate(orderId,{status},{new:true});
+        res.status(200).send({
+            message:"success"
+        })
+    }
+    catch(error){
+        return res.status(500).send({
+            message:error
+        })
+    }
+}
 module.exports = {
-    createAll,getfoodController,getsinglefoodcontroller,getbyresturentid,updatefood,deletefood,placorderfunction
+    createAll,getfoodController,getsinglefoodcontroller,getbyresturentid,updatefood,deletefood,placorderfunction,
+    changeorderstatus
 }

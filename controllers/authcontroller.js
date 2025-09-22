@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const registerController = async (req, res) => {
     try{
-        const {username,email,password,Phone} = req.body;
+        const {username,email,password,Phone,usertype} = req.body;
         if(!username || !email || !password || !Phone){
             return res.status(400).json({message:"All fields are required"});
         }
@@ -11,9 +11,20 @@ const registerController = async (req, res) => {
         if(existingUser){
             return res.status(400).json({message:"User already exists"});
         }
+        const allowed = ['client','admin','vendor','driver'];
+        const finalUsertype = allowed.includes(usertype) ? usertype : 'client';
+
         const hashedPassword = await bcrypt.hash(password,10);
-        const user = await User.create({username,email,password:hashedPassword,Phone});
-        res.status(201).json({message:"User created successfully",user});
+        const user = await User.create({
+            username,
+            email,
+            password:hashedPassword,
+            Phone,
+            usertype: finalUsertype
+        });
+        const safeUser = user.toObject();
+        delete safeUser.password;
+        return res.status(201).json({message:"User created successfully",user: safeUser});
     }catch(error){
         res.status(500).json({message:error.message})
     }
