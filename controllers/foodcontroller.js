@@ -1,4 +1,5 @@
 const Food = require('../models/foodmodel');
+const orderModel = require('../models/orderModel');
 const Restaurant = require('../models/restuarentmodel'); // Import restaurant model
 const mongoose = require('mongoose');
 
@@ -198,6 +199,37 @@ const deletefood = async (req, res) => {
         });
     }
 }
+const placorderfunction=async(req,res)=>{
+    try{
+        const {cart}=req.body;
+        let total=0;
+        if(!cart) {
+            res.status(500).send({
+                "message": "error"
+            });
+        }
+        cart.map(i=>{
+            total+=i.price
+        });
+        const newOrder=await orderModel({
+            foods:cart,
+            payment:total,
+            buyer:req.user
+        })
+        console.log(req.user);
+        //console.log(req.user._id);
+        res.status(200).send({
+            message:"order placed ",
+            newOrder
+        })
+    }
+    catch(error){
+        console.log("error")
+        res.status(500).send({
+            message: error
+        });
+    }
+}
 module.exports = {
-    createAll,getfoodController,getsinglefoodcontroller,getbyresturentid,updatefood,deletefood
+    createAll,getfoodController,getsinglefoodcontroller,getbyresturentid,updatefood,deletefood,placorderfunction
 }
